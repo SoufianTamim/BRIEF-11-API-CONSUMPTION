@@ -1,0 +1,23 @@
+{
+  "name": "brief-11",
+  "version": "1.0.0",
+  "description": "this a repository of api CONSUMPTION",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SoufianTamim/BRIEF-11-API-CONSUMPTION.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SoufianTamim/BRIEF-11-API-CONSUMPTION/issues"
+  },
+  "homepage": "https://github.com/SoufianTamim/BRIEF-11-API-CONSUMPTION#readme",
+  "dependencies": {
+    "bootstrap": "^5.2.3",
+    "jquery": "3.6.3"
+  }
+}

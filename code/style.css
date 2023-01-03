@@ -3,14 +3,5 @@
   padding: 0;
   margin: 0;
   font-family: "Radio Canada";
-  font-size: 1rem;
-}
-.active{
-    background-color: rgb(255, 176, 176);
-    height: 3rem;
-    border-radius: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  font-size: 1.2rem;
 }

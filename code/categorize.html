@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="/code/style.css">
+  <link rel="shortcut icon" href="#">
+  <title>Categorize</title>
+</head>
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                <a class="nav-link active" href="/code/index.html">GreKit</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link"  href="/code/index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="/code/categorize.html">Categorize</a>
+                </li>
+            </ul>
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" placeholder="Search a plate ..." aria-label="Search">
+                <button class="btn btn-outline-success">Search</button>
+            </form>
+            </div>
+        </div>
+    </nav>
+  </header>
+  <section class="d-flex flex-row justify-content-center align-items-center flex-wrap gap-3">
+    <select id="categ" class="form-select form-select-lg mb-3 w-25" >
+      <option value="All Categories" >All Categories</option>
+    </select>
+
+    <select id="Countries" class="form-select form-select-lg mb-3 w-25" >
+      <option value="All Area" >All Area</option>
+    </select>
+  </section>
+
+
+
+
+
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script src="/node_modules/jquery/dist/jquery.js"></script>
+    <script>
+
+
+
+
+
+
+
+
+
+
+      let Categories;
+      function GetCategories() {
+        $.ajax({
+          url: "https://www.themealdb.com/api/json/v1/1/categories.php",
+          type: "GET",
+          success: function (data) {
+            Categories = data.categories;
+            AddCategories(Categories);
+            console.log(Categories[0].strCategory);
+          },
+          });
+      }
+      GetCategories();
+      function AddCategories(data){
+        for(let i = 0 ; i < data.length ; i++){
+          let sel =`<option value="${data[i].strCategory}">${data[i].strCategory}</option>`
+          document.getElementById("categ").innerHTML += sel
+        }
+      }
+
+
+
+      let CoutriesCat;
+      function GetCountries() {
+        $.ajax({
+          url: "https://www.themealdb.com/api/json/v1/1/list.php?a=list",
+          type: "GET",
+          success: function (data) {
+            CoutriesCat = data.meals;
+            AddCountry(CoutriesCat);
+            console.log(CoutriesCat[0].strArea);
+          },
+          });
+      }
+      GetCountries();
+      function AddCountry(data){
+        for(let i = 0 ; i < data.length ; i++){
+          let sel =`<option value="${data[i].strArea}">${data[i].strArea}</option>`
+          document.getElementById("Countries").innerHTML += sel
+        }
+      }
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

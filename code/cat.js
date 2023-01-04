@@ -8,7 +8,6 @@ function GetCategories() {
     success: function (data) {
       Categories = data.categories;
       AddCategories(Categories);
-      console.log(Categories[0].strCategory);
     },
     });
 }
@@ -42,10 +41,9 @@ function AddCountry(data){
 
 document.getElementById("filter").onclick =function() {
 
-  let SelectedCountry = document.getElementById("Countries").value;
+    let SelectedCountry = document.getElementById("Countries").value;
     let SelectedCategory = document.getElementById("categ").value;
-    let SelectedCategoryTarget;
-    let SelectedCountryTarget;
+    let SelectedCategoryTarget, SelectedCountryTarget;
 
     $.ajax({
       url: "https://www.themealdb.com/api/json/v1/1/filter.php?c=" + SelectedCategory,
@@ -64,28 +62,26 @@ document.getElementById("filter").onclick =function() {
         SelectedCountryTarget = data.meals;
       },
     });
-
-
-
-
-
-
-    console.log(SelectedCategoryTarget);
-    console.log(SelectedCountryTarget);
-
-
-
-
-  BuildCard()
-
-
-
-
-
+    
+  console.log(SelectedCategoryTarget);
+  console.log(SelectedCountryTarget);
+  BuildCardById(SelectedCategoryTarget, SelectedCountryTarget);
 }
 
 
 
 
-
-
+function BuildCardById(array1, array2) {
+  let result = [];
+    for (let i = 0; i < array1.length; i++) {
+      for (let j = 0; j < array2.length; j++) {
+        if (array1[i].idMeal === array2[j].idMeal) {
+          console.log(array1[i].idMeal);
+          result.push(array1[i]);
+        }
+			}
+    }
+  console.log(result);
+  BuildCard(result)
+		return false;
+}

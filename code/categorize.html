@@ -27,27 +27,28 @@
             </ul>
             <form class="d-flex" role="search">
                 <input class="form-control me-2" placeholder="Search a plate ..." aria-label="Search" id="SearchInput">
-                <button class="btn btn-outline-success" id="SearchBtn" >Search</button>
+                <button class="btn btn-outline-primary" id="SearchBtn" >Search</button>
             </form>
             </div>
         </div>
     </nav>
 </header>
-<section class="d-flex flex-row justify-content-center align-items-center flex-wrap gap-3">
+<section class="d-flex flex-row justify-content-center align-items-center flex-wrap gap-3 text-align-center mt-5">
 
-  <select id="categ" class="form-select form-select-lg mb-3 w-25" >
+  <select id="categ" class="form-select form-select-lg mb-3 w-25 " >
     <option value="All Categories" >All Categories</option>
   </select>
 
   <select id="Countries" class="form-select form-select-lg mb-3 w-25" >
     <option value="All Area">All Area</option>
   </select>
-  <button  class="btn btn-outline-primary" id="filter">filter</button>
+
+  <button class="btn btn-primary mb-3" id="filter">Filter</button>
 
 </section>
 
 
-<section class="d-flex flex-row justify-content-center align-items-center flex-wrap gap-3 container w-75" id="cards"></section>
+<section class="d-flex flex-row justify-content-center align-items-center flex-wrap gap-3 container w-75 mt-5" id="cards"></section>
 <section>
     <div class="modal fade mb-5"  id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" style='max-width: 90%;'>
@@ -55,9 +56,6 @@
         </div>
     </div>  
 </section>
-
-
-
 
     <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
     <script src="/node_modules/jquery/dist/jquery.js"></script>

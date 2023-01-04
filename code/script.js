@@ -40,7 +40,7 @@ function BuildCard(data) {
   for (let j = 0; j < data.length; j++) {
 
     let Card = `
-    <div class="card" style="width: 18rem; ">
+    <div class="card mt-4" style="width: 18rem; ">
       <img src="${data[j].strMealThumb}" class="card-img-top" alt="Thumbnail ${data[j].strMealThumb}" width="100">
         <div class="card-body">
             <h5 class="card-title">${data[j].strMeal}</h5>
@@ -71,10 +71,8 @@ function DisplayDetails(id) {
     document.getElementById("area").style.display = "none"
   }
 
-  let Ingred,Measure ;
-  Ingred =""
-  Measure=""
-
+  let Ingred = "", Measure = "";
+  
   for(let i = 1 ; i < 20 ;i++ ){
     if (ide[0]["strIngredient"+i] !== null && ide[0]["strIngredient"+i] !== ""&& ide[0]["strIngredient"+i] !== " "){
       Ingred += `<li>${ide[0]["strIngredient"+i]}</li>`
@@ -83,7 +81,6 @@ function DisplayDetails(id) {
       Measure += `<li>${ide[0]["strMeasure"+i]}</li>`
     }
   }
-
 
   modalContent.innerHTML = `
   <div class="modal-header d-flex justify-content-center ">
@@ -126,5 +123,3 @@ function DisplayDetails(id) {
   </div>`;
   $('#exampleModal').modal('show');
 }
-
-

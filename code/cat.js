@@ -28,7 +28,6 @@ function GetCountries() {
     success: function (data) {
       CoutriesCat = data.meals;
       AddCountry(CoutriesCat);
-      console.log(CoutriesCat[0].strArea);
     },
     });
 }
@@ -40,3 +39,53 @@ function AddCountry(data){
     document.getElementById("Countries").innerHTML += sel
   }
 }
+
+document.getElementById("filter").onclick =function() {
+
+  let SelectedCountry = document.getElementById("Countries").value;
+    let SelectedCategory = document.getElementById("categ").value;
+    let SelectedCategoryTarget;
+    let SelectedCountryTarget;
+
+    $.ajax({
+      url: "https://www.themealdb.com/api/json/v1/1/filter.php?c=" + SelectedCategory,
+      type: "GET",
+      async: false,
+      success: function (data) {
+        SelectedCategoryTarget = data.meals;
+      },
+    });
+
+    $.ajax({
+      url: "https://www.themealdb.com/api/json/v1/1/filter.php?a=" + SelectedCountry,
+      type: "GET",
+      async: false,
+      success: function (data) {
+        SelectedCountryTarget = data.meals;
+      },
+    });
+
+
+
+
+
+
+    console.log(SelectedCategoryTarget);
+    console.log(SelectedCountryTarget);
+
+
+
+
+  BuildCard()
+
+
+
+
+
+}
+
+
+
+
+
+

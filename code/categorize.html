@@ -39,76 +39,11 @@
     </select>
 
     <select id="Countries" class="form-select form-select-lg mb-3 w-25" >
-      <option value="All Area" >All Area</option>
+      <option value="All Area">All Area</option>
     </select>
   </section>
-
-
-
-
-
     <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
     <script src="/node_modules/jquery/dist/jquery.js"></script>
-    <script>
-
-
-
-
-
-
-
-
-
-
-      let Categories;
-      function GetCategories() {
-        $.ajax({
-          url: "https://www.themealdb.com/api/json/v1/1/categories.php",
-          type: "GET",
-          success: function (data) {
-            Categories = data.categories;
-            AddCategories(Categories);
-            console.log(Categories[0].strCategory);
-          },
-          });
-      }
-      GetCategories();
-      function AddCategories(data){
-        for(let i = 0 ; i < data.length ; i++){
-          let sel =`<option value="${data[i].strCategory}">${data[i].strCategory}</option>`
-          document.getElementById("categ").innerHTML += sel
-        }
-      }
-
-
-
-      let CoutriesCat;
-      function GetCountries() {
-        $.ajax({
-          url: "https://www.themealdb.com/api/json/v1/1/list.php?a=list",
-          type: "GET",
-          success: function (data) {
-            CoutriesCat = data.meals;
-            AddCountry(CoutriesCat);
-            console.log(CoutriesCat[0].strArea);
-          },
-          });
-      }
-      GetCountries();
-      function AddCountry(data){
-        for(let i = 0 ; i < data.length ; i++){
-          let sel =`<option value="${data[i].strArea}">${data[i].strArea}</option>`
-          document.getElementById("Countries").innerHTML += sel
-        }
-      }
-
-
-
-
-
-
-
-
-    </script>
+    <script src="/code/cat.js"></script>
 </body>
 </html>

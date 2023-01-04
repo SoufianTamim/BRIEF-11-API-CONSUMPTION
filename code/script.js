@@ -1,12 +1,11 @@
 let Random;
 
-
 function GetRandom() {
-  for (let i = 0 ; i < 6 ;i++) {
+  for (let i = 0; i < 6; i++) {
     $.ajax({
       url: "https://www.themealdb.com/api/json/v1/1/random.php",
       type: "GET",
-      dataType:"json",
+      async: false,
       success: function (data) {
         Random = data.meals;
         BuildCard(Random);
@@ -16,50 +15,111 @@ function GetRandom() {
 }
 GetRandom()
 
+function BuildCard(data) {
 
-function BuildCard(data){
-  let CardsPlace = document.getElementById("cards");
-  let Card = "";
+  for (let j = 0; j < 6; j++) {
 
-  for( let i = 0 ; i < 6 ;i++){
-    Card += `
-    <div class="card" style="width: 18rem; height: 28rem;" id='${
-      data[i].idMeal
-    }'>
-      <img src="${data[i].strMealThumb}" class="card-img-top" alt="Thumbnail ${
-      data[i].strMealThumb
-    }" width="100">
+    let Card = `
+    <div class="card" style="width: 18rem; ">
+      <img src="${data[j].strMealThumb}" class="card-img-top" alt="Thumbnail ${data[j].strMealThumb}" width="100">
         <div class="card-body">
-            <h5 class="card-title">${data[i].strMeal}</h5>
-            <p>${data[i].strCategory} ${" : " +data[i].strArea}</p>
-            <button class="btn btn-primary" id="${data[i].idMeal}" data-bs-toggle="modal" data-bs-target="#exampleModal">learn more ..</button>
+            <h5 class="card-title">${data[j].strMeal}</h5>
+            <p>${data[j].strCategory} ${" : " + data[j].strArea}</p>
+            <button class="btn btn-primary"  onclick="DisplayDetails(${data[j].idMeal})" >learn more ..</button>
         </div>
     </div>
     `;
-    CardsPlace.innerHTML += Card
+    document.getElementById("cards").innerHTML += Card
   }
 }
 
-function DisplayDetails() {
+function DisplayDetails(id) {
+  let ide;
+  $.ajax({
+    url: "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + id,
+    type: "GET",
+    async: false,
+    success: function (data) {
+      ide = data.meals;
+    },
+  });
   let modalContent = document.getElementById("modalContent");
-  modalContent += `
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Wontons</h1>
-                        <img src="" class="card-img-top" alt="Thumbnail" width="100">
-                    </div>
-                    <div class="modal-body" >
-                        <p class="modal-body"> Category </p>
-                        <p class="modal-body"> Region </p>
-                        <p>Ingredients</p>
-                        <p></p>
-                    </div>
-                    < class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-     `;
-  
-  modalContent.innerHTML += Card;
-      
+
+  if (ide[0].strTags == null || ide[0].strTags == "") {
+    document.getElementById("tag").style.display = "none"
+  } else if (ide[0].strArea == null || ide[0].strArea == "Unknown") {
+    document.getElementById("area").style.display = "none"
+  }
+
+  let Ingred,Measure ;
+  Ingred =""
+  Measure=""
+
+  for(let i = 1 ; i < 20 ;i++ ){
+    if (ide[0]["strIngredient"+i] !== null && ide[0]["strIngredient"+i] !== ""&& ide[0]["strIngredient"+i] !== " "){
+      Ingred += `<li>${ide[0]["strIngredient"+i]}</li>`
+    }
+    if (ide[0]["strMeasure"+i] !== null && ide[0]["strMeasure"+i] !== ""&& ide[0]["strMeasure"+i] !== " "){
+      Measure += `<li>${ide[0]["strMeasure"+i]}</li>`
+    }
+  }
+
+
+  modalContent.innerHTML = `
+  <div class="modal-header d-flex justify-content-center ">
+  <h1 class="modal-title fs-5" id="exampleModalLabel">${ide[0].strMeal}</h1> 
+  </div>
+  <div class="modal-body d-flex">
+  <div > 
+  <img src="${ide[0].strMealThumb}" class="rounded"  alt="Thumbnail ${ide[0].strMeal}" width="400">
+  </div>
+  <div class="col-md-8"> 
+  <div class="ms-3">
+  <div class="border rounded-3 m-1 ps-4">
+  </ul class="m-1 p-2">
+  <li> id : ${ide[0].idMeal}</li>
+  <li> Category : ${ide[0].strCategory}</li>
+  <li id="area"> Area : ${ide[0].strArea}</li>
+  <li id="tag"> Tag : ${ide[0].strTags}</li>
+  </ul>
+  </div>
+  <div class="border rounded-3 m-1 p-2">
+  <h5>Instructions</h5>
+  <p>${ide[0].strInstructions}</p>
+  </div>
+  <div class="border rounded-3 m-1 p-2  d-flex flex-row justify-content-around">
+  <div>
+  <h5>Ingredients</h5>
+  <ol>${Ingred}</ol>  
+  </div>
+  <div>
+  <h5>Measures</h5>
+  <ol>${Measure}</ol>   
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  <div class="modal-footer">
+  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>  
+  <a href="${ide[0].strYoutube}" target="_blank"><button type="button" class="btn btn-primary" >Go <i class="fa-brands fa-youtube"></i></button></a>
+  </div>`;
+  $('#exampleModal').modal('show');
 }
 
 
+function search(){
+  let SearchValue = document.getElementById("SearchInput").value;
+  let SearchTarget;
+  $.ajax({
+    url: "https://www.themealdb.com/api/json/v1/1/search.php?s=" + SearchValue,
+    type: "GET",
+    async: false,
+    success: function (data) {
+      SearchTarget = data.meals;
+      BuildCard(SearchTarget)
+
+    },
+  });
+
+}

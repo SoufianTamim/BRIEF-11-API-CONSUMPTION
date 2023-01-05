@@ -22,7 +22,6 @@ GetRandom()
 
 function BuildCard(data) {
   document.getElementById("cards").innerHTML = ""
-  console.log(data);
 
   if (data === null || data.length == 0  ){
     document.getElementById("cards").innerHTML = `<h3>No item Found</h3>`

@@ -73,8 +73,9 @@ document.getElementById("filter").onclick =function() {
     BuildCard(SelectedCategoryTarget);
   } else if (SelectedCategory == "*" && SelectedCountry == "*") {
     console.log("All");
+
     for (let i = 0; i < Categories.length; i++){
-      for (let j = 0; j < All.length; j++){
+      // for (let j = 0; j < All.lenght; j ++){
         
         $.ajax({
           url:
@@ -84,13 +85,14 @@ document.getElementById("filter").onclick =function() {
           async: false,
           success: function (data) {
             All = data.meals;
-            AllCat.push(All[j]);
-            BuildCard(AllCat);
+            AllCat.push(All);
+            console.log(AllCat[i]);
+            BuildCard(AllCat[i]);
             
           },
         });
+        // }
       }
-    }
 
 
 

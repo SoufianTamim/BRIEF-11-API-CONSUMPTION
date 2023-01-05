@@ -15,25 +15,25 @@
         <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #e3f2fd;">
             <div class="container-fluid">
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex align-content-center">
                     <li class="nav-item">
-                    <a class="nav-link active" href="#">GreKit</a>
+                    <a class="nav-link active" href="/code/index.html"><img src="/Images/logo.png" alt="logo chef" width="60"></a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link"  href="/code/index.html">Home</a>
+                    <a class="nav-link"  href="/code/index.html" class="mt-2">Home</a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link" href="/code/categorize.html">Categorize</a>
+                    <a class="nav-link" href="/code/categorize.html" class="mt-2">Categorize</a>
                     </li>
                 </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" placeholder="Search a plate ..." aria-label="Search" id="SearchInput">
-                    <button class="btn btn-outline-success" id="SearchBtn" >Search</button>
-                </form>
                 </div>
             </div>
         </nav>
     </header>
+    <form class="d-flex  flex-row justify-content-center align-items-center flex-wrap gap-3 text-align-center mt-5" role="search">
+        <input class="form-control-lg me-2 w-25" placeholder="Search a plate ..." aria-label="Search" id="SearchInput">
+        <button class="btn btn-outline-primary" id="SearchBtn" >Search</button>
+      </form>
     <section class="d-flex flex-row justify-content-center align-items-center flex-wrap gap-3 container w-75" id="cards"></section>
     <section>
         <div class="modal fade mb-5"  id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

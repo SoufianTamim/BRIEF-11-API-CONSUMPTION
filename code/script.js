@@ -2,21 +2,6 @@ let Random;
 
 
 
-document.getElementById("SearchBtn").onclick = function(e){
-  e.preventDefault()
-  let SearchValue = document.getElementById("SearchInput").value;
-  let SearchTarget;
-  $.ajax({
-    url: "https://www.themealdb.com/api/json/v1/1/search.php?s=" + SearchValue,
-    type: "GET",
-    async: false,
-    success: function (data) {
-      SearchTarget = data.meals;
-      BuildCard(SearchTarget)
-    },
-  });
-}
-
 let arr = [];
 function GetRandom() {
   for (let i = 0; i < 6; i++) {
@@ -33,23 +18,25 @@ function GetRandom() {
   BuildCard(arr);
 }
 GetRandom()
-
 function BuildCard(data) {
   document.getElementById("cards").innerHTML = ""
-
-  for (let j = 0; j < data.length; j++) {
-
-    let Card = `
-    <div class="card mt-4" style="width: 18rem; ">
-      <img src="${data[j].strMealThumb}" class="card-img-top" alt="Thumbnail ${data[j].strMealThumb}" width="100">
-        <div class="card-body">
-            <h5 class="card-title">${data[j].strMeal}</h5>
-            <p>...</p>
-            <button class="btn btn-primary"  onclick="DisplayDetails(${data[j].idMeal})" >learn more ..</button>
-        </div>
-    </div>
-    `;
-    document.getElementById("cards").innerHTML += Card
+  console.log(data);
+  if (data === null || data.length == 0  ){
+    document.getElementById("cards").innerHTML = `<h3>No item Found</h3>`
+  }else{
+    for (let j = 0; j < data.length; j++) {
+      let Card = `
+      <div class="card mt-4" style="width: 18rem; ">
+        <img src="${data[j].strMealThumb}" class="card-img-top" alt="Thumbnail ${data[j].strMealThumb}" width="100">
+          <div class="card-body">
+              <h5 class="card-title">${data[j].strMeal}</h5>
+              <p>...</p>
+              <button class="btn btn-primary"  onclick="DisplayDetails(${data[j].idMeal})" >learn more ..</button>
+          </div>
+      </div>
+      `;
+      document.getElementById("cards").innerHTML += Card
+    }
   }
 }
 
@@ -122,4 +109,19 @@ function DisplayDetails(id) {
   <a href="${ide[0].strYoutube}" target="_blank"><button type="button" class="btn btn-primary" >Go <i class="fa-brands fa-youtube"></i></button></a>
   </div>`;
   $('#exampleModal').modal('show');
+}
+
+document.getElementById("SearchBtn").onclick = function(e){
+  e.preventDefault()
+  let SearchValue = document.getElementById("SearchInput").value;
+  let SearchTarget;
+  $.ajax({
+    url: "https://www.themealdb.com/api/json/v1/1/search.php?s=" + SearchValue,
+    type: "GET",
+    async: false,
+    success: function (data) {
+      SearchTarget = data.meals;
+      BuildCard(SearchTarget)
+    },
+  });
 }

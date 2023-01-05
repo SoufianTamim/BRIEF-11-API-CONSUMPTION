@@ -9,7 +9,7 @@ html{
 p{
   padding: 0;
 }
-#filter{
+#filter, #SearchBtn{
   height: 2.8rem;
   font-size: 1.3rem;
 }

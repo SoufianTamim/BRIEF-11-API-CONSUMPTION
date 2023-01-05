@@ -1,16 +1,26 @@
 let Categories,CoutriesCat;
+let AllCat = [];
 
 function GetCategories() {
+
+
+
+
+
   $.ajax({
     url: "https://www.themealdb.com/api/json/v1/1/categories.php",
     type: "GET",
     async: false,
     success: function (data) {
       Categories = data.categories;
-      AddCategories(Categories);
+      AllCat.push(Categories)
+      AddCategories(Categories); 
     },
-    });
+  });
 }
+
+
+
 GetCategories();
 function AddCategories(data){
   for(let i = 0 ; i < data.length ; i++){
@@ -62,10 +72,18 @@ document.getElementById("filter").onclick =function() {
         SelectedCountryTarget = data.meals;
       },
     });
-    
-  console.log(SelectedCategoryTarget);
-  console.log(SelectedCountryTarget);
-  BuildCardById(SelectedCategoryTarget, SelectedCountryTarget);
+    if(SelectedCountry !== "*" ){
+      BuildCard(SelectedCountryTarget);
+
+    }else if(SelectedCategoryTarget !== "*"){
+      BuildCard(SelectedCategoryTarget);
+
+    }else if (SelectedCategoryTarget == "*" && SelectedCountry == "*"){
+      BuildCard(SelectedCategoryTarget);
+      BuildCard(SelectedCountryTarget);
+    }else{
+      BuildCardById(SelectedCategoryTarget, SelectedCountryTarget);
+    }
 }
 
 

@@ -1,7 +1,7 @@
 let Categories,
   CoutriesCat,
   All,
-  AllCat;
+  AllCat=[];
 
 function GetCategories() {
     $.ajax({
@@ -10,8 +10,6 @@ function GetCategories() {
       async: false,
       success: function (data) {
         Categories = data.categories;
-        AllCat = Categories;
-        AddCategories(Categories);
       },
     });
 
@@ -75,6 +73,25 @@ document.getElementById("filter").onclick =function() {
     BuildCard(SelectedCategoryTarget);
   } else if (SelectedCategory == "*" && SelectedCountry == "*") {
     console.log("All");
+    for (let i = 0; i < Categories.length; i++){
+      for (let j = 0; j < All.length; j++){
+        
+        $.ajax({
+          url:
+          "https://www.themealdb.com/api/json/v1/1/filter.php?c=" +
+          Categories[i].strCategory,
+          type: "GET",
+          async: false,
+          success: function (data) {
+            All = data.meals;
+            AllCat.push(All[j]);
+            BuildCard(AllCat);
+            
+          },
+        });
+      }
+    }
+
 
 
   } else {
@@ -82,22 +99,6 @@ document.getElementById("filter").onclick =function() {
     BuildCardById(SelectedCategoryTarget, SelectedCountryTarget);
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 function BuildCardById(array1, array2) {

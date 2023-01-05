@@ -1,8 +1,8 @@
-let Random;
+let Random,
+  arr = [],
+  ide,
+  SearchTarget;
 
-
-
-let arr = [];
 function GetRandom() {
   for (let i = 0; i < 6; i++) {
     $.ajax({
@@ -17,10 +17,13 @@ function GetRandom() {
   }
   BuildCard(arr);
 }
+
 GetRandom()
+
 function BuildCard(data) {
   document.getElementById("cards").innerHTML = ""
   console.log(data);
+
   if (data === null || data.length == 0  ){
     document.getElementById("cards").innerHTML = `<h3>No item Found</h3>`
   }else{
@@ -41,7 +44,7 @@ function BuildCard(data) {
 }
 
 function DisplayDetails(id) {
-  let ide;
+
   $.ajax({
     url: "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + id,
     type: "GET",
@@ -114,7 +117,6 @@ function DisplayDetails(id) {
 document.getElementById("SearchBtn").onclick = function(e){
   e.preventDefault()
   let SearchValue = document.getElementById("SearchInput").value;
-  let SearchTarget;
   $.ajax({
     url: "https://www.themealdb.com/api/json/v1/1/search.php?s=" + SearchValue,
     type: "GET",

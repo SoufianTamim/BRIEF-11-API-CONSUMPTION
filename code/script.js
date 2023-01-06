@@ -1,7 +1,5 @@
-let Random,
-  arr = [],
-  ide,
-  SearchTarget;
+let Random,arr = [],ide,SearchTarget;
+  
 
 function GetRandom() {
   for (let i = 0; i < 6; i++) {
@@ -26,14 +24,14 @@ function BuildCard(data) {
   if (data === null || data.length == 0  ){
     document.getElementById("cards").innerHTML = `<h3>No item Found</h3>`
   }else{
-    for (let j = 0; j < data.length; j++) {
+    for (let i = 0; i < data.length; i++) {
       let Card = `
       <div class="card mt-4" style="width: 18rem; ">
-        <img src="${data[j].strMealThumb}" class="card-img-top" alt="Thumbnail ${data[j].strMealThumb}" width="100">
+        <img src="${data[i].strMealThumb}" class="card-img-top" alt="Thumbnail ${data[i].strMealThumb}" width="100">
           <div class="card-body">
-              <h5 class="card-title">${data[j].strMeal}</h5>
+              <h5 class="card-title">${data[i].strMeal}</h5>
               <p>...</p>
-              <button class="btn btn-primary"  onclick="DisplayDetails(${data[j].idMeal})" >More ...</button>
+              <button class="btn btn-primary"  onclick="DisplayDetails(${data[i].idMeal})" >More ...</button>
           </div>
       </div>
       `;
@@ -113,16 +111,3 @@ function DisplayDetails(id) {
   $('#exampleModal').modal('show');
 }
 
-document.getElementById("SearchBtn").onclick = function(e){
-  e.preventDefault()
-  let SearchValue = document.getElementById("SearchInput").value;
-  $.ajax({
-    url: "https://www.themealdb.com/api/json/v1/1/search.php?s=" + SearchValue,
-    type: "GET",
-    async: false,
-    success: function (data) {
-      SearchTarget = data.meals;
-      BuildCard(SearchTarget)
-    },
-  });
-}

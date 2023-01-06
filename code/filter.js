@@ -1,7 +1,72 @@
-let Categories,
-  CoutriesCat,
-  All,
-  AllCat=[];
+const DATA ={AllCats:[] ,result :[],SelectedCategoryTarget:[],SelectedCountryTarget:[],SearchTarget:[]}
+
+let Categories,CoutriesCat,All,AllCat=[]; 
+
+
+
+
+
+
+
+
+
+document.getElementById("SearchBtn").onclick = function(e){
+  e.preventDefault()
+  let SearchValue = document.getElementById("SearchInput").value;
+  $.ajax({
+    url: "https://www.themealdb.com/api/json/v1/1/search.php?s=" + SearchValue,
+    type: "GET",
+    async: false,
+    success: function (data) {
+      SearchTarget = data.meals;
+      DATA.SearchTarget=SearchTarget
+      console.log(SearchTarget);
+    },
+  });
+  Paginate("SearchTarget")
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function Paginate(array, PageId =1, CardsNum=6){
+  console.log("Wooooow");
+  FunctionArray = DATA[array];
+  let Index, StartIndex, EndIndex,Portion = [],Reminder, MaxPageNum;
+  Portion.length = 0
+  Index = PageId * CardsNum
+  StartIndex = Index - CardsNum
+  EndIndex = StartIndex + CardsNum
+  Reminder = FunctionArray.length % CardsNum
+  if(Reminder == 0){
+    MaxPageNum = Math.floor(FunctionArray.length / CardsNum)
+  } else {
+    MaxPageNum = Math.floor(FunctionArray.length / CardsNum) + 1
+  }
+  for (let i = StartIndex ; i < EndIndex ;i++){
+    Portion.push(FunctionArray[i])
+  }
+  BuildCard(Portion)
+  BuildPagination(PageId , MaxPageNum, array ,CardsNum)
+}
+function BuildPagination(PageId, MaxPageNum, array, CardsNum){
+  let HtmlPagination = document.querySelector(".pagination")
+  HtmlPagination.innerHTML = ""
+
+for( let i = 1 ; i <= MaxPageNum ;i++){
+  HtmlPagination.innerHTML += `<li class="page-item"><a class="page-link" onclick="Paginate('${String(array)}', ${i}, ${CardsNum})">${i}</a></li>`
+}
+}
 
 function GetCategories() {
     $.ajax({
@@ -13,9 +78,7 @@ function GetCategories() {
         AddCategories(Categories)
       },
     });
-
 }
-
 GetCategories();
 
 function AddCategories(data){
@@ -24,9 +87,7 @@ function AddCategories(data){
     let sel =`<option value="${data[i].strCategory}">${data[i].strCategory}</option>`
     document.getElementById("categ").innerHTML += sel
   }
-
 }
-
 function GetCountries() {
   $.ajax({
     url: "https://www.themealdb.com/api/json/v1/1/list.php?a=list",
@@ -38,7 +99,6 @@ function GetCountries() {
     },
     });
 }
-
 GetCountries();
 function AddCountry(data){
   for(let i = 0 ; i < data.length ; i++){
@@ -46,7 +106,6 @@ function AddCountry(data){
     document.getElementById("Countries").innerHTML += sel
   }
 }
-
 document.getElementById("filter").onclick =function() {
     let SelectedCountry = document.getElementById("Countries").value;
     let SelectedCategory = document.getElementById("categ").value;
@@ -70,15 +129,14 @@ document.getElementById("filter").onclick =function() {
       },
     });
   if (SelectedCountry !== "*" && SelectedCategory == "*") {
-    console.log("countries");
-    BuildCard(SelectedCountryTarget );
+    DATA["SelectedCountryTarget"]=SelectedCountryTarget;
+    Paginate("SelectedCountryTarget" );
     
   } else if (SelectedCountry == "*" && SelectedCategory !== "*") {
-    console.log("Categories");
-    BuildCard(SelectedCategoryTarget);
+    DATA["SelectedCategoryTarget"]=SelectedCategoryTarget;
+    Paginate("SelectedCategoryTarget");
   } else if (SelectedCategory == "*" && SelectedCountry == "*") {
-    console.log("All");
-
+    AllCat.length = 0;
     for (let i = 0; i < Categories.length; i++){ 
         $.ajax({
           url:
@@ -89,16 +147,16 @@ document.getElementById("filter").onclick =function() {
           success: function (data) {
             All = data.meals;
             AllCat.push(All);
+            DATA["AllCats"] = AllCat.flat(1);
           },
         });
       }
-      BuildCard(AllCat.flat(1));
+      Paginate("AllCats");
   } else {
-    console.log("Both");
+
     BuildCardById(SelectedCategoryTarget, SelectedCountryTarget);
   }
 }
-
 function BuildCardById(array1, array2) {
   let result = [];
     for (let i = 0; i < array1.length; i++) {
@@ -108,30 +166,7 @@ function BuildCardById(array1, array2) {
         }
 			}
     }
-  BuildCard(result)
-}
+    DATA["result"]=result;
 
-
-
-
-function Paginate (array, PageId, CardsNum){
-
-  let Index, StartIndex, EndIndex,Portion = [] ;
-  Portion.lenght = 0
-  Index = PageId * CardsNum
-  StartIndex = Index * CardsNum
-  EndIndex = StartIndex * CardsNum
-  console.log(array);
-  console.log(Index);
-  console.log(StartIndex);
-  console.log(EndIndex);
-
-  for (let i = StartIndex ; i < EndIndex;i++){
-
-  }
-
-}
-
-function BuildPagination(){
-
+  Paginate("result")
 }

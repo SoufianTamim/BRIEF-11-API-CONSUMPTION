@@ -63,9 +63,45 @@ function BuildPagination(PageId, MaxPageNum, array, CardsNum){
   let HtmlPagination = document.querySelector(".pagination")
   HtmlPagination.innerHTML = ""
 
-for( let i = 1 ; i <= MaxPageNum ;i++){
-  HtmlPagination.innerHTML += `<li class="page-item"><a class="page-link" onclick="Paginate('${String(array)}', ${i}, ${CardsNum})">${i}</a></li>`
+  for (let i = 1; i <= MaxPageNum; i++){
+  if (i == PageId) {
+    HtmlPagination.innerHTML += 
+    `<li class="page-item active">
+    <a class="page-link" onclick="Paginate('${String(array)}', ${i}, ${CardsNum})">${i}</a>
+    </li>`;
+  } else {
+    HtmlPagination.innerHTML +=
+      `<li class="page-item">
+        <a class="page-link" onclick="Paginate('${String(array)}', ${i}, ${CardsNum})">${i}</a>
+      </li>`;
+
+  }
+
+    
+
+
+    
+    
+    
+
+
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
 }
 
 function GetCategories() {
@@ -136,6 +172,7 @@ document.getElementById("filter").onclick =function() {
     DATA["SelectedCategoryTarget"]=SelectedCategoryTarget;
     Paginate("SelectedCategoryTarget");
   } else if (SelectedCategory == "*" && SelectedCountry == "*") {
+    
     AllCat.length = 0;
     for (let i = 0; i < Categories.length; i++){ 
         $.ajax({

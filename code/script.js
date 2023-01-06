@@ -1,6 +1,6 @@
+//============ initialize some arrays to get data with
 let Random,arr = [],ide,SearchTarget;
-  
-
+//============ getting random cards function from the api
 function GetRandom() {
   for (let i = 0; i < 6; i++) {
     $.ajax({
@@ -15,9 +15,9 @@ function GetRandom() {
   }
   BuildCard(arr);
 }
-
+//======= self invoking the function to build random cards
 GetRandom()
-
+//======== build card function 
 function BuildCard(data) {
   document.getElementById("cards").innerHTML = ""
 
@@ -39,9 +39,8 @@ function BuildCard(data) {
     }
   }
 }
-
+//============= display modal details function
 function DisplayDetails(id) {
-
   $.ajax({
     url: "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + id,
     type: "GET",
@@ -110,4 +109,3 @@ function DisplayDetails(id) {
   </div>`;
   $('#exampleModal').modal('show');
 }
-

@@ -1,18 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Radio+Canada:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
-html{
+@import url("https://fonts.googleapis.com/css2?family=Radio+Canada:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap");
+html {
   padding: 0;
   margin: 0;
   font-family: "Radio Canada";
   font-size: 1.2rem;
   box-sizing: border-box;
 }
-p{
+p {
   padding: 0;
 }
-#filter, #SearchBtn{
+#filter,
+#SearchBtn {
   height: 2.8rem;
   font-size: 1.3rem;
 }
-a{
+a {
   cursor: pointer;
 }

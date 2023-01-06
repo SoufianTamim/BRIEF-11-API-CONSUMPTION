@@ -1,92 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
-  <link rel="stylesheet" href="/code/style.css">
-  <link rel="shortcut icon" href="#">
-  <title>Categorize</title>
-</head>
-<body>
-  <header>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #e3f2fd;">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/code/style.css" />
+    <link rel="shortcut icon" href="#" />
+    <title>Categorize</title>
+  </head>
+  <body>
+    <!-- ========================================== NavBar build ================================================== -->
+    <header>
+      <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #e3f2fd">
         <div class="container-fluid">
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                    <a class="nav-link active" href="/code/index.html"><img src="/Images/logo.png" alt="logo chef" width="60"></a>
-                  </li>
-                  <li class="nav-item mt-2 fs-5">
-                    <a class="nav-link"  href="/code/index.html">Home</a>
-                  </li>
-                  <li class="nav-item mt-2 fs-5">
-                    <a class="nav-link" href="/code/filter.html">Categorize</a>
-                  </li>
-              </ul>
-            </div>
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" href="/code/index.html"><img src="/Images/logo.png" alt="logo chef" width="60" /></a>
+              </li>
+              <li class="nav-item mt-2 fs-5">
+                <a class="nav-link" href="/code/index.html">Home</a>
+              </li>
+              <li class="nav-item mt-2 fs-5">
+                <a class="nav-link" href="/code/filter.html">Categorize</a>
+              </li>
+            </ul>
+          </div>
         </div>
-    </nav>
-</header>
-<form class="d-flex  flex-row justify-content-center align-items-center flex-wrap gap-3 text-align-center mt-5" role="search">
-  <input class="form-control-lg me-2 w-25" placeholder="Search a plate ..." aria-label="Search" id="SearchInput">
-  <button class="btn btn-outline-primary" id="SearchBtn" onclick="SearchMeals()">Search</button>
-</form>
-
-
-
-
-<section class="d-flex flex-row justify-content-center align-items-center flex-wrap gap-3 text-align-center mt-5">
-
-
-
-  <select id="categ" class="form-select form-select-lg mb-3 w-25 " >
-    <option value="*" >All Categories</option>
-    <option value="Lamb" selected>Lamb</option>
-
-
-  </select>
-
-  <select id="Countries" class="form-select form-select-lg mb-3 w-25" >
-    <option value="*">All Areas</option>
-    <option value="Moroccan" selected>Moroccan</option>
-
-  </select>
-
-  <button class="btn btn-outline-primary mb-3" id="filter">Filter</button>
-
-</section>
-
-
-<section class="d-flex flex-row justify-content-center align-items-center flex-wrap gap-3 container w-75 mt-5"  id="cards"></section>
-<section>
-    <div class="modal fade mb-5"  id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" style='max-width: 90%;'>
-            <div class="modal-content" id="modalContent"></div>
+      </nav>
+    </header>
+    <!-- ========================================== Search input  ================================================== -->
+    <form class="d-flex flex-row justify-content-center align-items-center flex-wrap gap-3 text-align-center mt-5" role="search">
+      <input class="form-control-lg me-2 w-25" placeholder="Search a plate ..." aria-label="Search" id="SearchInput" />
+      <button class="btn btn-outline-primary" id="SearchBtn">Search</button>
+    </form>
+    <!-- ========================================== Select option inputs ================================================== -->
+    <section class="d-flex flex-row justify-content-center align-items-center flex-wrap gap-3 text-align-center mt-5">
+      <select id="categ" class="form-select form-select-lg mb-3 w-25">
+        <option value="*">All Categories</option>
+        <option value="Lamb" selected>Lamb</option>
+      </select>
+      <select id="Countries" class="form-select form-select-lg mb-3 w-25">
+        <option value="*">All Areas</option>
+        <option value="Moroccan" selected>Moroccan</option>
+      </select>
+      <button class="btn btn-outline-primary mb-3" id="filter">Filter</button>
+    </section>
+    <!-- ========================================== Cards Place build ================================================== -->
+    <section class="d-flex flex-row justify-content-center align-items-center flex-wrap gap-3 container w-75 mt-5" id="cards"></section>
+    <!-- ========================================== modal build code ================================================== -->
+    <section>
+      <div class="modal fade mb-5" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="max-width: 90%">
+          <div class="modal-content" id="modalContent"></div>
         </div>
-    </div>  
-</section>
-
-
-
-
-
-
-    <div  class="d-flex justify-content-center mt-5">
+      </div>
+    </section>
+  <!-- ========================================== pagination buttons ================================================== -->
+    <div class="d-flex justify-content-center mt-5">
       <ul class="pagination flex-wrap">
         <!-- <li class="page-item disabled" ><a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a></li>
         <li class="page-item"><a class="page-link" href="#">Next</a></li> -->
       </ul>
     </div>
-
-<footer>
-  <div class="text-center p-3 mt-5" style="background-color: #d6e6fe">© 2022 Copyright: Soufian Tamim</div>
-</footer>
+  <!-- ========================================== footer ================================================== -->
+    <footer>
+      <div class="text-center p-3 mt-5" style="background-color: #d6e6fe">© 2022 Copyright: Soufian Tamim</div>
+    </footer>
 
     <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
     <script src="/node_modules/jquery/dist/jquery.js"></script>
     <script src="/code/script.js"></script>
     <script src="/code/filter.js"></script>
-</body>
+  </body>
 </html>

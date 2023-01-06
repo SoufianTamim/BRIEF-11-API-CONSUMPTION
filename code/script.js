@@ -33,7 +33,7 @@ function BuildCard(data) {
           <div class="card-body">
               <h5 class="card-title">${data[j].strMeal}</h5>
               <p>...</p>
-              <button class="btn btn-primary"  onclick="DisplayDetails(${data[j].idMeal})" >learn more ..</button>
+              <button class="btn btn-primary"  onclick="DisplayDetails(${data[j].idMeal})" >More ...</button>
           </div>
       </div>
       `;

@@ -33,8 +33,14 @@
   <input class="form-control-lg me-2 w-25" placeholder="Search a plate ..." aria-label="Search" id="SearchInput">
   <button class="btn btn-outline-primary" id="SearchBtn" >Search</button>
 </form>
+<div class="d-flex justify-content-center ">
+  
+  <div id="pagination-control" class="border"></div>
+</div>
 
 <section class="d-flex flex-row justify-content-center align-items-center flex-wrap gap-3 text-align-center mt-5">
+
+
 
   <select id="categ" class="form-select form-select-lg mb-3 w-25 " >
     <option value="*" >All Categories</option>
@@ -49,7 +55,7 @@
 </section>
 
 
-<section class="d-flex flex-row justify-content-center align-items-center flex-wrap gap-3 container w-75 mt-5" id="cards"></section>
+<section class="d-flex flex-row justify-content-center align-items-center flex-wrap gap-3 container w-75 mt-5"  id="cards"></section>
 <section>
     <div class="modal fade mb-5"  id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" style='max-width: 90%;'>
@@ -58,9 +64,16 @@
     </div>  
 </section>
 
-<div>
-  <button id="paginationBtn"></button>
-</div>
+
+
+
+
+
+
+
+<footer>
+  <div class="text-center p-3 mt-5" style="background-color: #d6e6fe">© 2022 Copyright: Soufian Tamim</div>
+</footer>
 
     <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
     <script src="/node_modules/jquery/dist/jquery.js"></script>

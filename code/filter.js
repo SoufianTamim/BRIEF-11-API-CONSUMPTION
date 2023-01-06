@@ -10,7 +10,7 @@ function GetCategories() {
       async: false,
       success: function (data) {
         Categories = data.categories;
-        AddCategories(data)
+        AddCategories(Categories)
       },
     });
 
@@ -110,12 +110,6 @@ function BuildCardById(array1, array2) {
     }
   BuildCard(result)
 }
-
-
-
-
-
-
 
 
 

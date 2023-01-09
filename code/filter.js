@@ -1,10 +1,4 @@
 //============ intializing a data reference for all the arrays for pagination 
-
-setTimeout(function () {
-  $("#filter").click();
-}, 500);
-
-
 const DATA = { AllCats: [], result: [], SelectedCategoryTarget: [], SelectedCountryTarget: [], SearchTarget: [] }
 //============ declaring variables to use get api arrays
 let Categories, CoutriesCat, All, AllCat = [];
@@ -186,3 +180,4 @@ function BuildCardById(array1, array2) {
   DATA["result"] = result;
   Paginate("result")
 }
+$("#filter").click();
